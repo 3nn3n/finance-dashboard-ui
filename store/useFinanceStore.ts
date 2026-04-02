@@ -1,4 +1,3 @@
-// src/store/useFinanceStore.ts
 
 import { create } from "zustand";
 import { mockTransactions } from "@/data/mockTransactions";
