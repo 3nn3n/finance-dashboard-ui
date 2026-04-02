@@ -16,6 +16,7 @@ type Category =
   | 'Health'
   | 'Others';
 
+
 type Transaction = {
   id: string;
   date: string; // This thing should be an ISO string
