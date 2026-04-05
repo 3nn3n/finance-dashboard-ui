@@ -35,3 +35,39 @@ export const getExpensesByCategory = (transactions: Transaction[]) => {
     value,
   }));
 };
+
+export const getMonthlyTrends = (transactions: Transaction[]) => {
+  const result: Record<string, { income: number; expenses: number }> = {};
+
+  transactions.forEach((t) => {
+    const month = new Date(t.date).toLocaleString("default", { month: "short", year: "numeric" });
+    if (!result[month]) {
+      result[month] = { income: 0, expenses: 0 };
+    }
+    if (t.type === "income") {
+      result[month].income += t.amount;
+    } else if (t.type === "expense") {
+      result[month].expenses += t.amount;
+    }
+  });
+
+  return Object.entries(result).map(([month, values]) => ({
+    month,
+    ...values,
+  }));
+};
+
+
+export const monthlyChangePercentage = (transactions: Transaction[]) => {
+  const trends = getMonthlyTrends(transactions);
+  return trends.map((t, i) => {
+    if (i === 0) return { ...t, incomeChange: 0, expenseChange: 0 };
+    const prev = trends[i - 1];
+    return {
+      ...t,
+      incomeChange: prev.income ? ((t.income - prev.income) / prev.income) * 100 : 0,
+      expenseChange: prev.expenses ? ((t.expenses - prev.expenses) / prev.expenses) * 100 : 0,
+    };
+  });
+};
+
