@@ -17,7 +17,7 @@ type Filters = {
 
 type Theme = "light" | "dark";
 
-type View = "dashboard" | "transactions" | "insights";
+type View = "dashboard" | "transactions" | "insights" | "settings";
 
 
 type FinanceStore = {
