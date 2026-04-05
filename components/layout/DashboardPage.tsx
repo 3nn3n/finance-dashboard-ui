@@ -83,7 +83,7 @@ const DashboardPage = () => {
         </Card>
       </div>
     </div>
-  )
+)
 }
 
 export default DashboardPage
