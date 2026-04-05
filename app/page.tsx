@@ -2,7 +2,7 @@
 
 import { AppSidebar } from "@/components/layout/AppSidebar";
 import Header from "@/components/layout/Header";
-import { useFinanceStore } from "@/store/useFinanceStore";
+import MainView from "@/components/layout/MainView";
 
 export default function Home() {
 
@@ -11,6 +11,7 @@ export default function Home() {
       <AppSidebar />
       <main className="flex-1 min-w-0 overflow-auto">
         <Header />
+        <MainView />
       </main>
     </>
   );
