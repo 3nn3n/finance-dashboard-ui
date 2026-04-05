@@ -118,7 +118,7 @@ export function ChartPieDonutActive() {
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm font-medium">
-        <div className="flex gap-2 text-white">
+        <div className="flex gap-2">
           All expense categories
           <TrendingUp className="h-4 w-4" />
         </div>

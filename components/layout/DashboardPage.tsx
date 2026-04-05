@@ -12,11 +12,11 @@ const DashboardPage = () => {
     <div>
       <div className='grid grid-cols-3 gap-5'>
         <div>
-          <Card className='flex items-start gap-0'>
+          <Card className='flex items-start gap-0 bg-green-700/10'>
             <div className='flex items-center gap-2 mx-5'>
               <div><HandCoins className='text-blue-500' /></div>
               <div>
-                <h1 className='text-gray-300'>Savings</h1>
+                <h1 className='text-gray-500'>Savings</h1>
               </div>
             </div>
             <div className='text-4xl font-bold flex items-center gap-1 mx-5 mt-2'>
@@ -30,11 +30,11 @@ const DashboardPage = () => {
           </Card>
         </div>
         <div>
-          <Card className='flex items-start justify-between gap-0'>
+          <Card className='flex items-start justify-between gap-0 bg-green-700/10'>
             <div className='flex items-center gap-2 mx-5'>
               <div><BanknoteArrowUp className='text-green-500' /></div>
               <div>
-                <h1 className='text-gray-300'>Income</h1>
+                <h1 className='text-gray-500'>Income</h1>
               </div>
             </div>
             <div className='text-4xl font-bold flex items-center gap-1 mx-5 mt-2'>
@@ -48,11 +48,11 @@ const DashboardPage = () => {
           </Card>
         </div>
         <div>
-          <Card className='flex items-start justify-between gap-0'>
+          <Card className='flex items-start justify-between gap-0 bg-red-700/10'>
             <div className='flex items-center gap-2 mx-5'>
               <div><BanknoteArrowDown className='text-red-500' /></div>
               <div>
-                <h1 className='text-gray-300'>Expenses</h1>
+                <h1 className='text-gray-500'>Expenses</h1>
               </div>
             </div>
             <div className='text-4xl font-bold flex items-center gap-1 mx-5 mt-2'>
