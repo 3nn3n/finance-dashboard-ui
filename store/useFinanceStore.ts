@@ -17,12 +17,16 @@ type Filters = {
 
 type Theme = "light" | "dark";
 
+type View = "dashboard" | "transactions" | "insights" | "settings";
+
+
 type FinanceStore = {
   // STATE
   transactions: Transaction[];
   filters: Filters;
   role: Role;
   theme: Theme;
+  view: View;
 
   // ACTIONS
   addTransaction: (t: Transaction) => void;
@@ -30,6 +34,8 @@ type FinanceStore = {
   setFilters: (filters: Partial<Filters>) => void;
   setRole: (role: Role) => void;
   setTheme: (theme: Theme) => void;
+  setView: (view: View) => void;
+
 
   // DERIVED
   filteredTransactions: () => Transaction[];
@@ -48,6 +54,7 @@ export const useFinanceStore = create<FinanceStore>((set, get) => ({
   },
   role: "admin",
   theme: "light",
+  view: "dashboard",
 
   // ---------------- ACTIONS ----------------
   addTransaction: (t) =>
@@ -70,6 +77,8 @@ export const useFinanceStore = create<FinanceStore>((set, get) => ({
   setRole: (role) => set({ role }),
 
   setTheme: (theme) => set({ theme }),
+
+  setView: (view) => set({ view }),
 
   // ---------------- DERIVED ----------------
 
