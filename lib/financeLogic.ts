@@ -1,3 +1,4 @@
+import { mockTransactions } from "@/data/mockTransactions";
 
 // Use it for getting total income
 export const getTotalIncome = (transactions: Transaction[]) => {
@@ -65,9 +66,69 @@ export const monthlyChangePercentage = (transactions: Transaction[]) => {
     const prev = trends[i - 1];
     return {
       ...t,
-      incomeChange: prev.income ? ((t.income - prev.income) / prev.income) * 100 : 0,
-      expenseChange: prev.expenses ? ((t.expenses - prev.expenses) / prev.expenses) * 100 : 0,
+      incomeChange: prev.income ? parseFloat((((t.income - prev.income) / prev.income) * 100).toFixed(2)) : 0,
+      expenseChange: prev.expenses ? parseFloat((((t.expenses - prev.expenses) / prev.expenses) * 100).toFixed(2)) : 0,
     };
   });
+};
+
+export const getHighestSpendingCategory = (transactions: Transaction[]) => {
+  const expensesByCategory = getExpensesByCategory(transactions);
+  if (expensesByCategory.length === 0) return null;
+  return expensesByCategory.reduce((max, category) => category.value > max.value ? category : max);
+};
+
+export const spendingLastMonth = (transactions: Transaction[]) => {
+  const lastMonth = new Date();
+  lastMonth.setMonth(lastMonth.getMonth() - 1);
+  return transactions
+    .filter((t) => t.type === "expense" && new Date(t.date) >= lastMonth)
+    .reduce((sum, t) => sum + t.amount, 0);
+};
+
+export const IncreaseSpendingPercentageMonthly = (transactions: Transaction[]) => {
+  const trends = getMonthlyTrends(transactions);
+  if (trends.length < 2) return 0;
+  const lastMonth = trends[trends.length - 1];
+  const prevMonth = trends[trends.length - 2];
+  return prevMonth.expenses ? parseFloat((((lastMonth.expenses - prevMonth.expenses) / prevMonth.expenses) * 100).toFixed(2)) : 0;
+};
+
+export const IncreaseSpendingMonthly = (transactions: Transaction[]) => {
+  const trends = getMonthlyTrends(transactions);
+  if (trends.length < 2) return 0;
+  const lastMonth = trends[trends.length - 1];
+  const prevMonth = trends[trends.length - 2];
+  return parseFloat((lastMonth.expenses - prevMonth.expenses).toFixed(2));
+};
+
+export const getAverageMonthlyExpense = (transactions: Transaction[]) => {
+  const trends = getMonthlyTrends(transactions);
+  if (trends.length === 0) return 0;
+  const totalExpense = trends.reduce((sum, t) => sum + t.expenses, 0);
+  return parseFloat((totalExpense / trends.length).toFixed(2));
+};
+
+export const IncreaseaverageMonthlyExpense = (transactions: Transaction[]) => {
+  const trends = getMonthlyTrends(transactions);
+  if (trends.length < 2) return 0;
+  const lastMonthExpense = trends[trends.length - 1].expenses;
+  const prevMonthExpense = trends[trends.length - 2].expenses;
+  return prevMonthExpense ? parseFloat((((lastMonthExpense - prevMonthExpense) / prevMonthExpense) * 100).toFixed(2)) : 0;
+};
+
+export const getSavingsRate = (transactions: Transaction[]) => {
+  const totalIncome = getTotalIncome(transactions);
+  const totalExpenses = getTotalExpenses(transactions);
+  if (totalIncome === 0) return 0;
+  return parseFloat((((totalIncome - totalExpenses) / totalIncome) * 100).toFixed(2));
+};
+
+export const monthlySavingIncreasePercentage = (transactions: Transaction[]) => {
+  const trends = getMonthlyTrends(transactions);
+  if (trends.length < 2) return 0;
+  const lastMonthSavings = trends[trends.length - 1].income - trends[trends.length - 1].expenses;
+  const prevMonthSavings = trends[trends.length - 2].income - trends[trends.length - 2].expenses;
+  return prevMonthSavings ? parseFloat((((lastMonthSavings - prevMonthSavings) / prevMonthSavings) * 100).toFixed(2)) : 0;
 };
 
