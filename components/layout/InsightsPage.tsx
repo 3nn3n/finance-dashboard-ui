@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card } from '../ui/card'
-import { Film, IndianRupee, Lightbulb, PiggyBank, Pizza, ShoppingCart, Wallet } from 'lucide-react'
+import { CalendarRangeIcon, Film, IndianRupee, Lightbulb, PiggyBank, Pizza, ShoppingCart, Wallet } from 'lucide-react'
 import { getAverageMonthlyExpense, getExpensesByCategory, getHighestSpendingCategory, getSavingsRate, IncreaseaverageMonthlyExpense, IncreaseSpendingMonthly, IncreaseSpendingPercentageMonthly, monthlySavingIncreasePercentage, spendingLastMonth } from '@/lib/financeLogic'
 import { mockTransactions } from '@/data/mockTransactions'
 import { ChartRadarLinesOnly } from '../charts/RadialLineChart'
@@ -48,7 +48,7 @@ const InsightsPage = () => {
         <div>
           <Card>
             <div className="flex px-4 space-x-4">
-              <div className='pt-1'><IndianRupee className='text-green-600 bg-green-200 border rounded-md p-1' /></div>
+              <div className='pt-1'><CalendarRangeIcon className='text-green-600 bg-green-200 border rounded-md p-1' /></div>
               <div className='flex flex-col'>
                 <div><h3 className='text-gray-500 text-sm'>Avg. Monthly Expense</h3></div>
                 <div className='mt-2'><h1 className='text-3xl font-semibold'>₹ {getAverageMonthlyExpense(mockTransactions)}</h1></div>

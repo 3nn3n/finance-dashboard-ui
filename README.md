@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Personal Finance Dashboard
+
+A sleek and intuitive personal finance dashboard built with **Next.js**, **TypeScript**, and **Tailwind CSS**. Track your income, expenses, and financial insights all in one place.
+
+## Features
+
+- **Dashboard** — Overview of savings, income, and expenses with area and pie charts
+- **Transactions** — Filterable, searchable transaction table with add/edit support
+- **Insights** — Spending radar, savings rate, highest category spend, and monthly trends
+- **Settings** — Dark/light theme toggle, role switcher (admin/viewer), and profile info
+- **Role-Based Access** — Admin (full access) and Viewer (read-only) roles
+- **Responsive Sidebar** — Collapsible navigation with mobile support
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS 4 |
+| UI Components | shadcn/ui + Radix UI |
+| Charts | Recharts |
+| State Management | Zustand |
+| Table | TanStack React Table |
+| Theming | next-themes |
+
+## Project Structure
+
+```
+zorvyn/
+├── app/                  # Next.js app router (layout, page, globals.css)
+├── components/
+│   ├── charts/           # AreaChart, PieChartDonut, RadialLineChart
+│   ├── layout/           # DashboardPage, TransactionsPage, InsightsPage, SettingsPage, Header, Sidebar, MainView
+│   ├── provider/         # ThemeProvider (next-themes)
+│   ├── table/            # Column definitions, DataTable
+│   └── ui/               # shadcn/ui primitives (Button, Card, Dialog, Select, Switch, etc.)
+├── data/                 # Mock transactions
+├── hooks/                # Custom hooks (use-mobile)
+├── lib/                  # Utility functions, finance logic, constants
+├── store/                # Zustand store (useFinanceStore)
+└── types/                # Global TypeScript types
+```
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- npm, yarn, pnpm, or bun
+
+### Install & Run
 
 ```bash
+# Install dependencies
+npm install
+
+# Start dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the dashboard.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## State Management
 
-To learn more about Next.js, take a look at the following resources:
+All app state lives in a single Zustand store (`useFinanceStore`):
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **transactions** — list of all transactions
+- **filters** — category, type, search, date range
+- **role** — `admin` | `viewer`
+- **theme** — `light` | `dark`
+- **view** — current active page
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Derived selectors compute filtered transactions, totals, and balances on the fly.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
